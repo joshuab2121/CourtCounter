@@ -1,22 +1,26 @@
 package com.example.android.courtcounter;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+public class MainActivity extends AppCompatActivity {
 
-public class MainActivity extends ActionBarActivity {
-
-    private int teamATotal = 0,
-            teamBTotal = 0;
+    private int teamATotal = 0, teamBTotal = 0;
+    private boolean isBasketballDisplayed = true;   /*Since there are only two sports being
+                                                      displayed a bool will work just fine to
+                                                      keep track of which sport is currently
+                                                      being displayed.  */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView sportName = (TextView) findViewById(R.id.sport_name);
+        sportName.setText(R.string.basketball);
     }
 
     @Override
@@ -90,6 +94,52 @@ public class MainActivity extends ActionBarActivity {
     public void resetScoreboard(View view) {
         teamATotal = teamBTotal = 0;
         displayForTeamA(teamATotal);
+        displayForTeamB(teamBTotal);
+    }
+
+    public void changeSport(View view) {
+        TextView sportName = (TextView) findViewById(R.id.sport_name);
+        TextView a3 = (TextView) findViewById(R.id.btn3PointsTeamA);
+        TextView a2 = (TextView) findViewById(R.id.btn2PointsTeamA);
+        TextView a1 = (TextView) findViewById(R.id.btn1PointTeamA);
+        TextView b3 = (TextView) findViewById(R.id.btn3PointsTeamB);
+        TextView b2 = (TextView) findViewById(R.id.btn2PointsTeamB);
+        TextView b1 = (TextView) findViewById(R.id.btn1PointTeamB);
+        TextView a6 = (TextView) findViewById(R.id.btnTouchdownTeamA);
+        TextView b6 = (TextView) findViewById(R.id.btnTouchdownTeamB);
+
+        if (isBasketballDisplayed) {
+            sportName.setText(R.string.football);
+            a3.setText(R.string.field_goal);
+            b3.setText(R.string.field_goal);
+            a2.setText(R.string.football_2_points);
+            b2.setText(R.string.football_2_points);
+            a1.setText(R.string.add_one_point);
+            b1.setText(R.string.add_one_point);
+            a6.setVisibility(View.VISIBLE);
+            b6.setVisibility(View.VISIBLE);
+        } else {
+            sportName.setText(R.string.basketball);
+            a3.setText(R.string.points_3);
+            b3.setText(R.string.points_3);
+            a2.setText(R.string.points_2);
+            b2.setText(R.string.points_2);
+            a1.setText(R.string.points_1);
+            b1.setText(R.string.points_1);
+            a6.setVisibility(View.GONE);
+            b6.setVisibility(View.GONE);
+        }
+        isBasketballDisplayed = !isBasketballDisplayed;
+        resetScoreboard(view);
+    }
+
+    public void add6PointsA(View view) {
+        teamATotal += 6;
+        displayForTeamA(teamATotal);
+    }
+
+    public void add6PointB(View view) {
+        teamBTotal += 6;
         displayForTeamB(teamBTotal);
     }
 }
