@@ -15,4 +15,5 @@
     <string name="field_goal">Field Goal</string>
     <string name="football_2_points">2 pt. Conversion/Safety</string>
     <string name="add_one_point">+1 Point</string>
+    <string name="change_sport">Change Sport</string>
 </resources>

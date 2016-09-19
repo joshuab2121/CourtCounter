@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int teamATotal = 0, teamBTotal = 0;
+    private int teamATotal = 0,
+                teamBTotal = 0;
     private boolean isBasketballDisplayed = true;   /*Since there are only two sports being
                                                       displayed a bool will work just fine to
                                                       keep track of which sport is currently
